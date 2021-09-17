@@ -6,10 +6,27 @@ var ground, ball;
 
 function setup() {
   createCanvas(800,400);
-  createSprite(400, 200, 50, 50);
+  engine=Engine.create();
+  world=engine.world;
+  var ground_options={
+    isStatic:true
+  }
+  var ball_options={
+    restitution:1.0
+  }
+  ground=Bodies.rectangle(200,390,200,20,ground_options);
+  World.add(world,ground);
+  ball=Bodies.circle(200,100,20,ball_options);
+  World.add(world,ball);
+  
 }
 
 function draw() {
-  background(255,255,255);  
+  background(0);  
+  Engine.update(engine);
+  rectMode(CENTER);
+  rect(ground.position.x,ground.position.y,800,20);
+  ellipseMode(RADIUS);
+  ellipse(ball.position.x,ball.position.y,20,20);
   drawSprites();
 }
